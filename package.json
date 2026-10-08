@@ -1,0 +1,43 @@
+{
+  "name": "number-literal",
+  "displayName": "number literal",
+  "description": "Show every representation of the numeric or character literal under the cursor.",
+  "publisher": "tony",
+  "version": "0.1.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "number literal",
+      "properties": {
+        "numberLiteral.width": {
+          "type": "string",
+          "enum": [
+            "64-bit",
+            "32-bit"
+          ],
+          "default": "64-bit",
+          "description": "Width of the integer card: 64-bit keeps the full value, 32-bit drops the bits above it."
+        },
+        "numberLiteral.endianness": {
+          "type": "string",
+          "enum": [
+            "LITTLE ENDIAN",
+            "BIG ENDIAN"
+          ],
+          "default": "LITTLE ENDIAN",
+          "description": "Byte order of the memory sequences."
+        }
+      }
+    }
+  }
+}
