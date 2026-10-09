@@ -1,7 +1,7 @@
 'use strict';
 
 const { analyzeLine } = require('../lib/scan');
-const { renderCard } = require('../lib/format');
+const { renderCard, wrapLine } = require('../lib/format');
 
 let passed = 0;
 let failed = 0;
@@ -295,6 +295,12 @@ function charCases() {
 }
 
 function extraCases() {
+  eq('wrap at the limit', wrapLine('a'.repeat(50)), ['a'.repeat(50)]);
+  eq('wrap 51', wrapLine('a'.repeat(51)), ['a'.repeat(50), 'a']);
+  eq('wrap 100', wrapLine('a'.repeat(100)), ['a'.repeat(50), 'a'.repeat(50)]);
+  eq('wrap 120', wrapLine('a'.repeat(120)), ['a'.repeat(50), 'a'.repeat(50), 'a'.repeat(20)]);
+  eq('wrap empty', wrapLine(''), ['']);
+
   eq('int 0x7C ASCII escaped', card('0x7C', 2).indexOf("'\\|'") >= 0, true);
 
   eq('3.14 F32 memory BE', rows(card('3.14', 2, { width: 'QWORD', endian: 'BE' }), 'MEM', 1),
